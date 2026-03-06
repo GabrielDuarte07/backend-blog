@@ -1,0 +1,15 @@
+{
+    "code-runner.runInTerminal": true,
+    "editor.formatOnSave": true,
+    "code-runner.executorMap": {
+        "typescript": "pnpx tsx"
+    },
+    "editor.codeActionsOnSave": {
+        "source.fixAll.biome": "always"
+    },
+    "editor.defaultFormatter": "biomejs.biome",
+    "explorer.compactFolders": false,
+    "editor.wordWrap": "on",
+    "workbench.editor.labelFormat": "short"
+    
+}
