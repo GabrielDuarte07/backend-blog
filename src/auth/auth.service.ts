@@ -3,8 +3,7 @@ import { LoginDto } from "./dto/login-dto";
 
 @Injectable()
 export class AuthService {
-	loginService(loginDTO: LoginDto): any {
-		console.log(loginDTO);
+	loginService(loginDTO: LoginDto): LoginDto {
 		return loginDTO;
 	}
 }
