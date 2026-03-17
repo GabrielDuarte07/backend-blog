@@ -256,7 +256,7 @@ export type UserCreateInput = {
   password: string
   forceLogout?: boolean
   createdAt?: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
 }
 
 export type UserUncheckedCreateInput = {
@@ -266,7 +266,7 @@ export type UserUncheckedCreateInput = {
   password: string
   forceLogout?: boolean
   createdAt?: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
 }
 
 export type UserUpdateInput = {
@@ -296,7 +296,7 @@ export type UserCreateManyInput = {
   password: string
   forceLogout?: boolean
   createdAt?: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
 }
 
 export type UserUpdateManyMutationInput = {

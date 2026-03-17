@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { PrismaBetterSqlite3 } from "@prisma/adapter-better-sqlite3";
-import { PrismaClient } from "./db/prisma/client";
+import { PrismaClient } from "../../db/prisma/client";
 
 @Injectable()
 export class PrismaService extends PrismaClient {

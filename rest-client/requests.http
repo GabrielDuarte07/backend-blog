@@ -2,14 +2,26 @@
 
 
 ### authLogin
+# @name logInUser
 POST {{baseURL}}/auth/login
 Content-Type: application/json
 
 {
   "email": "teste@teste.com",
-  "password": "123",
+  "password": "123"
 }
 
 ### get an user
-GET {{baseURL}}/user/12345
+# @name ReadOneUser
+GET {{baseURL}}/user/1234
 
+### create an user
+# @name createUser
+POST {{baseURL}}/user
+Content-Type: application/json
+
+{
+  "email": "teste@teste.com",
+  "password": "1245",
+  "name":"teste da silva"
+}
