@@ -1,6 +1,7 @@
 import { ConflictException, Injectable } from "@nestjs/common";
 import { HashingService } from "../common/hashing/hasing.service";
 import { PrismaService } from "../common/prisma/prisma.service";
+import { User } from "../db/prisma/client";
 import { CreateUserDto } from "./dto/create-user.dto";
 
 @Injectable()
@@ -28,5 +29,16 @@ export class UserService {
 
 		const created = await this.prisma.user.create({ data: newUser });
 		return created;
+	}
+
+	async findByEmail(email: string) {
+		return await this.prisma.user.findFirst({ where: { email } });
+	}
+
+	async save(userData: User) {
+		return await this.prisma.user.update({
+			where: { id: userData.id },
+			data: userData,
+		});
 	}
 }
