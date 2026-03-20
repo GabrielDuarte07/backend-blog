@@ -1,5 +1,6 @@
-import { Body, Controller, Get, Param, Post } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post, UseGuards } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
+import { AuthGuard } from "@nestjs/passport";
 import { CustomParseIntPipe } from "../common/pipes/custom-parse-int-pipe";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { UserService } from "./user.service";
@@ -10,10 +11,11 @@ export class UserController {
 		private readonly configService: ConfigService,
 		private readonly userService: UserService,
 	) {}
+
+	@UseGuards(AuthGuard("jwt"))
 	@Get(":id")
-	findOne(@Param("id", CustomParseIntPipe) id: string) {
+	findOne(@Param("id") id: string) {
 		const test = this.configService.getOrThrow("TESTE", "default");
-		console.log(test);
 		return `controller do usuario ${id}`;
 	}
 

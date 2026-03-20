@@ -1,4 +1,5 @@
 @baseURL = http://localhost:3000
+@jwtToken={{{{logInUser.response.body.accessToken}}}}
 
 
 ### authLogin
@@ -8,7 +9,7 @@ Content-Type: application/json
 
 {
   "email": "teste@teste.com",
-  "password": "123"
+  "password": "123456"
 }
 
 ### get an user
@@ -22,6 +23,6 @@ Content-Type: application/json
 
 {
   "email": "teste@teste.com",
-  "password": "1245",
+  "password": "123456",
   "name":"teste da silva"
 }

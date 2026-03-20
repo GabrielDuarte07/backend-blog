@@ -1,4 +1,8 @@
-import { ConflictException, Injectable } from "@nestjs/common";
+import {
+	ConflictException,
+	Injectable,
+	NotFoundException,
+} from "@nestjs/common";
 import { HashingService } from "../common/hashing/hasing.service";
 import { PrismaService } from "../common/prisma/prisma.service";
 import { User } from "../db/prisma/client";
@@ -33,6 +37,14 @@ export class UserService {
 
 	async findByEmail(email: string) {
 		return await this.prisma.user.findFirst({ where: { email } });
+	}
+
+	async findByID(id: string) {
+		const user = await this.prisma.user.findFirst({ where: { id } });
+		if (!user) {
+			throw new NotFoundException("User not found");
+		}
+		return user;
 	}
 
 	async save(userData: User) {
