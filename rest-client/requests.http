@@ -51,3 +51,14 @@ Authorization: Bearer {{jwtToken}}
   "currentPassword":"123456",
   "newPassword":"123456"
 }
+
+### read one user
+# @name readOneUser
+GET {{baseURL}}/user/me
+Authorization: Bearer {{jwtToken}}
+
+### delete one user
+# @name readOneUser
+DELETE {{baseURL}}/user/me
+Authorization: Bearer {{jwtToken}}
+

@@ -108,6 +108,12 @@ export class UserService {
 		return updated;
 	}
 
+	async remove(id: string) {
+		await this.findOneOrFail({ id });
+		const deleted = await this.prisma.user.delete({ where: { id } });
+		return deleted;
+	}
+
 	async save(userData: User) {
 		return await this.prisma.user.update({
 			where: { id: userData.id },
