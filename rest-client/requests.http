@@ -1,7 +1,17 @@
 @baseURL = http://localhost:3000
 @jwtToken={{logInUser.response.body.accessToken}}
 
+@postUuid = {{createPostOwned.response.body.id}}
+@postSlug = {{createPostOwned.response.body.slug}}
+@imagePath = {{uploadImage.response.body.url}}
+@imageUrl = {{baseURL}}{{imagePath}}
 
+@userNameForTesting=Gabriel
+@userEmailForTesting=gabriel@email.com
+@userPasswordForTesting=123456
+@userNewPasswordForTesting=123456
+
+# AUTH ############################
 
 ### authLogin
 # @name logInUser
@@ -12,6 +22,8 @@ Content-Type: application/json
   "email": "teste@teste.com",
   "password": "123456"
 }
+
+# USER ############################
 
 ### get an user
 # @name ReadOneUser
@@ -61,4 +73,51 @@ Authorization: Bearer {{jwtToken}}
 # @name readOneUser
 DELETE {{baseURL}}/user/me
 Authorization: Bearer {{jwtToken}}
+
+# POST ############################
+
+### create a post
+# @name createPostOwned
+POST {{baseURL}}/post/me
+Content-Type: application/json
+Authorization: Bearer {{jwtToken}}
+
+{
+  "title":"post title",
+  "excerpt":"Excerto",
+  "content":"post content"
+}
+
+### read all public posts
+# @name ReadAllPublicPosts
+GET {{baseURL}}/post
+
+### read one post owned
+# @name ReadOnePostOwned
+GET {{baseURL}}/post/me/{{postUuid}}
+Authorization: Bearer {{jwtToken}}
+
+### create a post
+# @name updateOnePostOwned
+PATCH {{baseURL}}/post/me/{{postUuid}}
+Content-Type: application/json
+Authorization: Bearer {{jwtToken}}
+
+{
+  "title":"post title",
+  "excerpt":"Excerto",
+  "content":"post content",
+  "published":true
+}
+
+### delete one post owned
+# @name DeleteOnePostOwned
+DELETE {{baseURL}}/post/me/{{postUuid}}
+Authorization: Bearer {{jwtToken}}
+
+# UPLOAD ################################################
+
+### Upload Image
+# @name uploadImage
+
 
