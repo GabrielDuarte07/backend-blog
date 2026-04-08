@@ -89,12 +89,21 @@ Authorization: Bearer {{jwtToken}}
 }
 
 ### read all public posts
-# @name ReadAllPublicPosts
+# @name readAllPostPublic
 GET {{baseURL}}/post
 
+### read one public post
+# @name readOnePostPublic
+GET {{baseURL}}/post/{{postSlug}}
+
 ### read one post owned
-# @name ReadOnePostOwned
+# @name readOnePostOwned
 GET {{baseURL}}/post/me/{{postUuid}}
+Authorization: Bearer {{jwtToken}}
+
+### read all post owned
+# @name readAllPostOwned
+GET {{baseURL}}/post/me
 Authorization: Bearer {{jwtToken}}
 
 ### create a post
@@ -119,5 +128,8 @@ Authorization: Bearer {{jwtToken}}
 
 ### Upload Image
 # @name uploadImage
+POST {{baseURL}}/upload
+Authorization: Bearer {{jwtToken}}
+Content-Type: multipart/form-data
 
 
