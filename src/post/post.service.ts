@@ -43,11 +43,21 @@ export class PostService {
 				where: { id: postData.id },
 				include: { author: true },
 			})
-			.catch((e) => {
+			.catch(() => {
 				throw new NotFoundException("Post not found");
 			});
 
 		return post;
+	}
+
+	async findAll(postData: Partial<Post>) {
+		const posts = await this.prisma.post.findMany({
+			where: { ...postData },
+			include: { author: true },
+			orderBy: { createdAt: "desc" },
+		});
+
+		return posts;
 	}
 
 	async findOneOwned(postData: Partial<Post>, author: User) {
@@ -56,7 +66,7 @@ export class PostService {
 				where: { id: postData.id, author: { id: author.id } },
 				include: { author: true },
 			})
-			.catch((e) => {
+			.catch(() => {
 				throw new NotFoundException("Post not found");
 			});
 
@@ -82,7 +92,7 @@ export class PostService {
 			.findFirstOrThrow({
 				where: { id: postData.id, author: { id: author.id } },
 			})
-			.catch((e) => {
+			.catch(() => {
 				throw new NotFoundException("Post not found");
 			});
 
@@ -98,5 +108,17 @@ export class PostService {
 		});
 
 		return updated;
+	}
+
+	async remove(id: string, author: User) {
+		await this.prisma.post
+			.findFirstOrThrow({
+				where: { id, author: { id: author.id } },
+			})
+			.catch(() => {
+				throw new NotFoundException("Post not found");
+			});
+		const deleted = await this.prisma.post.delete({ where: { id } });
+		return deleted;
 	}
 }

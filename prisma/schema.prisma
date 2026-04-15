@@ -35,6 +35,6 @@ model Post {
   published     Boolean  @default(false)
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
-  author        User     @relation(fields: [userId], references: [id])
+  author        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId        String
 }

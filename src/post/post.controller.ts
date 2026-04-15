@@ -1,7 +1,7 @@
 import {
-	BadRequestException,
 	Body,
 	Controller,
+	Delete,
 	Get,
 	Param,
 	ParseUUIDPipe,
@@ -54,5 +54,27 @@ export class PostController {
 	) {
 		const updated = await this.postService.update({ id }, dto, req.user);
 		return updated;
+	}
+
+	@UseGuards(JwtAuthGuard)
+	@Delete("me/:id")
+	async remove(
+		@Param("id", ParseUUIDPipe) id: string,
+		@Req() req: AuthenticatedRequest,
+	) {
+		const updated = await this.postService.remove(id, req.user);
+		return updated;
+	}
+
+	@Get(":slug")
+	async findOnePublished(@Param("slug") slug: string) {
+		const post = await this.postService.findOne({ slug, published: true });
+		return new PostResponseDTO(post);
+	}
+
+	@Get()
+	async findAllPublished() {
+		const posts = await this.postService.findAll({ published: true });
+		return posts.map((post) => new PostResponseDTO(post));
 	}
 }
