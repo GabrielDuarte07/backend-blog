@@ -1,4 +1,4 @@
-@baseURL = http://localhost:3000
+@baseURL = http://localhost:3001
 @jwtToken={{logInUser.response.body.accessToken}}
 
 @postUuid = {{createPostOwned.response.body.id}}
@@ -130,6 +130,20 @@ Authorization: Bearer {{jwtToken}}
 # @name uploadImage
 POST {{baseURL}}/upload
 Authorization: Bearer {{jwtToken}}
-Content-Type: multipart/form-data
+Content-Type: multipart/form-data; boundary=----BryenFormBoundary
 
+------BryenFormBoundary
+Content-Disposition: form-data; name="file"; filename="image.png"
+Content-Type: image/png
+
+../dev/images/image.png
+------BryenFormBoundary--
+
+
+### Read Image
+# @name readImage
+GET {{imageUrl}}
+
+
+####################################
 
